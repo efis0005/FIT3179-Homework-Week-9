@@ -1,0 +1,36 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 800,
+    "height": 800,
+    "title": "Australian Airports",
+    "projection": {"type": "equirectangular"},
+    "layer": [
+      {
+        "data": {
+          "url": "https://raw.githubusercontent.com/efis0005/FIT3179-Homework-Week-9/main/aus.topo.json",
+          "format": {"type": "topojson", "feature": "STE_2021_AUST_GDA2020-1"}
+        },
+        "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white"}
+      },
+      {
+        "data": {
+          "url": "https://raw.githubusercontent.com/efis0005/FIT3179-Homework-Week-9/main/airports.csv"
+        },
+        "mark": {"type": "circle", "tooltip": {"content": "data"}},
+        "encoding": {
+          "longitude": {"field": "longitude_deg", "type": "quantitative"},
+          "latitude": {"field": "latitude_deg", "type": "quantitative"},
+          "size": {
+            "field": "type",
+            "type": "nominal",
+            "scale": {"domain": ["small_airport", "medium_airport","large_airport", "extra_large_airports"]}
+          },
+          "color": {
+            "field": "elevation_ft",
+            "type": "quantitative",
+            "scale": {"scheme": "tealblues"}
+          }
+        }
+      }
+    ]
+  }
